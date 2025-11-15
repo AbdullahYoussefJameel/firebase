@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Textformfeldcos extends StatelessWidget {
-  const Textformfeldcos({super.key, required this.hintText, required this.mycontroller, this.validator, });
+class Costemtextform extends StatelessWidget {
+  const Costemtextform({super.key, required this.hintText, required this.mycontroller, this.validator, });
 final String hintText;
 final String? Function(String?)? validator;
 

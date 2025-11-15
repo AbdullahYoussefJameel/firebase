@@ -1,5 +1,6 @@
 import 'package:firebase/auth/homepage.dart';
 import 'package:firebase/auth/signup.dart';
+import 'package:firebase/categores/add.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,24 +46,25 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(appBarTheme: AppBarTheme(
+        backgroundColor: Colors.grey[100],
+        titleTextStyle: TextStyle(color: Colors.orange ,fontSize: 17,fontWeight: FontWeight.bold),
+        iconTheme:IconThemeData(
+          color: Colors.orange, 
+        ) ,
+
+      )),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
+home: (FirebaseAuth.instance.currentUser != null &&
+       FirebaseAuth.instance.currentUser!.emailVerified)
+    ? Homepage()
+    : Login(),
       routes: {
         "login": (context) => const Login(),
-        "signup": (context) => const signup(),
-        "homepage": (context) => const Homepage()
+        "signup": (context) => const Signup(),
+        "homepage": (context) => const Homepage(),
+        "addcat":(context)=> addcat(),
       },
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Login(),
     );
   }
 }

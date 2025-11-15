@@ -6,8 +6,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // Add Google Services classpath
-        classpath 'com.google.gms:google-services:4.3.8'
+        // تحديث Android Gradle Plugin (AGP) إلى النسخة المطلوبة
+        classpath 'com.android.tools.build:gradle:8.1.1'   // النسخة المدعومة من Flutter
+        classpath 'com.google.gms:google-services:4.3.8'   // Google Services
     }
 }
 
@@ -18,7 +19,7 @@ allprojects {
     }
 }
 
-// Change build directories for multi-module project
+// تغيير دليل البناء للمشروع متعدد الوحدات
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"

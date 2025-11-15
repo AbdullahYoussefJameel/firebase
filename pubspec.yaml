@@ -40,7 +40,8 @@ dependencies:
   firebase_storage: ^13.0.4
   firebase_messaging: ^16.0.4
   firebase_auth: ^6.1.2
-  google_sign_in: ^6.2.2
+  google_sign_in: ^6.2.1
+  awesome_dialog: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - images/keep-notes-dark.avif
     - images/absa.png
     - images/gogle.webp
+    - images/abc.jpg
 
     
   # An image asset can refer to one or more resolution-specific "variants", see
