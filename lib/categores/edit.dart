@@ -29,8 +29,16 @@ class _editcatState extends State<editcat> {
         setState(() {
           
         });
-       await categories.doc(widget.docid).update({
-        "name": name.text.trim()}
+      //  await categories.doc(widget.docid).update({
+      //   "name": name.text.trim()}
+        
+      //  );
+      // set that will make 2 think 1 edit your iteam and add anther iteam
+         await categories.doc('1234').set({
+         "name": name.text.trim(),
+          "id" :FirebaseAuth.instance.currentUser!.uid,
+        },SetOptions(merge: true)
+        
        );
         looding=false;
       Navigator.of(context).pushReplacementNamed("homepage");
