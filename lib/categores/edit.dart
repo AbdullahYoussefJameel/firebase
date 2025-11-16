@@ -37,7 +37,7 @@ class _editcatState extends State<editcat> {
          await categories.doc('1234').set({
          "name": name.text.trim(),
           "id" :FirebaseAuth.instance.currentUser!.uid,
-        },SetOptions(merge: true)
+        },SetOptions(merge: true) // make to edit and deleted the old name and id 
         
        );
         looding=false;

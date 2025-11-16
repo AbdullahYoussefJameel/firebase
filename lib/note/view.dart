@@ -1,26 +1,27 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/categores/edit.dart';
-import 'package:firebase/note/view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class nodeveiw extends StatefulWidget {
+    final String categoryid;
+
+  const nodeveiw({super.key, required this.categoryid});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<nodeveiw> createState() => _nodeveiwstat();
 }
 
-class _HomepageState extends State<Homepage> {
+class _nodeveiwstat extends State<nodeveiw> {
   List data=[];
 
 bool looling =true;
 
  getdata() async {
   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-      .collection('categories').where("id", isEqualTo:FirebaseAuth.instance.currentUser!.uid )
+      .collection('categories').doc(widget.categoryid).collection("note")
       .get();
     data.addAll(querySnapshot.docs);
     //await Future.delayed(Duration(seconds: 2));
@@ -50,7 +51,7 @@ bool looling =true;
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: Text("homepage"),
+        title: Text("view"),
         actions: [
           IconButton(
             onPressed: () async {
@@ -72,9 +73,6 @@ bool looling =true;
         itemBuilder: (context,i){
 
 return InkWell(
-  onTap: () {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>nodeveiw(categoryid: data[i].id)));
-  },
   onLongPress: () {
      AwesomeDialog(
     context: context,
@@ -82,14 +80,14 @@ return InkWell(
     desc: 'do you wont to deleted or edite',
     btnCancelText: "deleted",
     btnOkText: "edite",
-    btnOkOnPress: () async{
+     btnOkOnPress: () async{
       
-       await FirebaseFirestore.instance
-      .collection('categories').doc(data[i].id).delete();
-      Navigator.of(context).pushReplacementNamed("homepage");
+    //    await FirebaseFirestore.instance
+    //   .collection('categories').doc(data[i].id).delete();
+    //   Navigator.of(context).pushReplacementNamed("homepage");
     },
     btnCancelOnPress: ()async {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>editcat(docid: data[i].id, oldname: data[i]['name'])));
+    //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>editcat(docid: data[i].id, oldname: data[i]['name'])));
       
     },
   ).show();
@@ -99,11 +97,8 @@ return InkWell(
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/abc.jpg",
-                      height: 100,
-                    ),
-                    Text("${data[i]['name']}"),
+                    
+                    Text("${data[i]['note']}"),
                   ],
                 ),
               ),
